@@ -1,0 +1,64 @@
+= docker_helper - Helper methods to interact with Docker
+
+== VERSION
+
+This documentation refers to docker_helper version 0.0.0.
+
+
+== DESCRIPTION
+
+Control the Docker[https://docker.com] command-line client from Ruby. Contrary
+to {docker-api}[https://rubygems.org/gems/docker-api], this library only calls
+the Docker client as an external process and thus doesn't need to run with
+elevated privileges as a whole.
+
+Basic usage:
+
+  # Initialize proxy object or include in your own class
+  docker = DockerHelper.proxy
+
+  class MyClass; include DockerHelper; end
+  docker = MyClass.new
+
+  # Call central helper with any Docker action and arguments
+  docker.docker('inspect', 'my-container')
+  docker.docker(:images).lines.drop(1)
+
+  # Call predefined helper methods (short form only for proxy object)
+  docker.docker_version
+  docker.version
+
+  docker.docker_build(path, name)
+  docker.build(path, name)
+
+See DockerHelper for more information.
+
+
+== LINKS
+
+Documentation:: https://blackwinter.github.com/docker_helper
+Source code::   https://github.com/blackwinter/docker_helper
+RubyGem::       https://rubygems.org/gems/docker_helper
+
+
+== AUTHORS
+
+* Jens Wille <mailto:jens.wille@gmail.com>
+
+
+== LICENSE AND COPYRIGHT
+
+Copyright (C) 2014 Jens Wille
+
+docker_helper is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+docker_helper is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
+License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with docker_helper. If not, see <http://www.gnu.org/licenses/>.

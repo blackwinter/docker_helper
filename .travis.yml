@@ -19,6 +19,10 @@ matrix:
   fast_finish:
     true
 
+env:
+  global:
+    - DOCKER_COMMAND=docker
+
 script:
   rake spec
 

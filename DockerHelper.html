@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module DockerHelper - docker_helper Application documentation (v0.0.1)</title>
+
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    <div id="sections-section" class="nav-section">
+  <h3>Sections</h3>
+
+  <ul class="link-list" role="directory">
+    
+      <li><a href="#5Buntitled-5D"></a></li>
+    
+      <li><a href="#Internal">Internal</a></li>
+    
+  </ul>
+</div>
+
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-build_args">#build_args</a>
+    
+    <li ><a href="#method-i-docker">#docker</a>
+    
+    <li ><a href="#method-i-docker_build">#docker_build</a>
+    
+    <li ><a href="#method-i-docker_clean">#docker_clean</a>
+    
+    <li ><a href="#method-i-docker_clobber">#docker_clobber</a>
+    
+    <li ><a href="#method-i-docker_command">#docker_command</a>
+    
+    <li ><a href="#method-i-docker_container_name">#docker_container_name</a>
+    
+    <li ><a href="#method-i-docker_fail">#docker_fail</a>
+    
+    <li ><a href="#method-i-docker_image_name">#docker_image_name</a>
+    
+    <li ><a href="#method-i-docker_pipe">#docker_pipe</a>
+    
+    <li ><a href="#method-i-docker_reset">#docker_reset</a>
+    
+    <li ><a href="#method-i-docker_restart">#docker_restart</a>
+    
+    <li ><a href="#method-i-docker_start">#docker_start</a>
+    
+    <li ><a href="#method-i-docker_start-21">#docker_start!</a>
+    
+    <li ><a href="#method-i-docker_stop">#docker_stop</a>
+    
+    <li ><a href="#method-i-docker_system">#docker_system</a>
+    
+    <li ><a href="#method-i-docker_tags">#docker_tags</a>
+    
+    <li ><a href="#method-i-docker_url">#docker_url</a>
+    
+    <li ><a href="#method-i-docker_version">#docker_version</a>
+    
+    <li ><a href="#method-i-docker_volume">#docker_volume</a>
+    
+    <li ><a href="#method-i-extract_options">#extract_options</a>
+    
+    <li ><a href="#method-i-find_docker_command">#find_docker_command</a>
+    
+    <li ><a href="#method-i-proxy">#proxy</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-DockerHelper">
+  <h1 id="module-DockerHelper" class="module">
+    module DockerHelper
+  </h1>
+
+  <section class="description">
+    
+<p>Various helper methods to control the Docker command-line client. Main
+entrance point is the <a
+href="DockerHelper.html#method-i-docker">docker</a> helper. Use ::proxy for
+a self-contained controller object to call these methods on.</p>
+
+<p>See <a
+href="DockerHelper.html#attribute-c-docker_command">::docker_command</a></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="VERSION">VERSION
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-c-docker_command" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">docker_command</span><span
+            class="attribute-access-type">[W]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Setter for the Docker command (see <a
+href="DockerHelper.html#attribute-c-docker_command">::docker_command</a>).</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-docker" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker(cmd, args...)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker(cmd, args...) { ... }
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Central helper method to execute Docker commands.</p>
+
+<p>If the command (first argument) is a symbol or if the <code>pipe</code>
+option is set, runs the command through <a
+href="DockerHelper.html#method-i-docker_pipe">docker_pipe</a> and returns
+the result as a string. Otherwise, runs the command through <a
+href="DockerHelper.html#method-i-docker_system">docker_system</a> and
+returns <code>true</code> or <code>false</code>, indicating whether the
+command exited successfully or not.</p>
+
+<p>In the pipe case, calls <a
+href="DockerHelper.html#method-i-docker_fail">docker_fail</a> when the
+<code>fail_if_empty</code> option is set and the command returned no
+result.</p>
+
+<p>In the system case, ignores errors when the <code>ignore_errors</code>
+option is set. The block is passed on to <a
+href="DockerHelper.html#method-i-docker_system">docker_system</a> if given.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span>, <span class="ruby-identifier">pipe</span>, <span class="ruby-identifier">fail_if_empty</span>, <span class="ruby-identifier">ignore_errors</span> = <span class="ruby-constant">DockerHelper</span>.
+    <span class="ruby-identifier">extract_options</span>(<span class="ruby-identifier">args</span>, <span class="ruby-value">:pipe</span>, <span class="ruby-value">:fail_if_empty</span>, <span class="ruby-value">:ignore_errors</span>)
+
+  <span class="ruby-constant">DockerHelper</span>.<span class="ruby-identifier">build_args</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pipe</span>
+    <span class="ruby-identifier">docker_pipe</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">res</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">fail_if_empty</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">res</span>
+        <span class="ruby-identifier">docker_fail</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword">end</span>
+    }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">ignore_errors</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:err</span>] = <span class="ruby-value">:close</span>
+      <span class="ruby-identifier">block</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-operator">|</span> }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">docker_system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_build" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_build(build_path, image)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Builds the image <code>image</code> from the Dockerfile and context at
+<code>build_path</code>.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#build">docker
+build </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_build-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_build</span>(<span class="ruby-identifier">build_path</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
+
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[build -t #{image} #{build_path}]</span>  <span class="ruby-comment"># --force-rm</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_clean" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_clean(name)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Stops and then removes container <code>name</code>, including associated
+volumes.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#rm">docker rm </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_clean-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_clean</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-identifier">docker_stop</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[rm -v -f #{name}]</span>, <span class="ruby-identifier">ignore_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_clobber" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_clobber(name, image)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Removes container <code>name</code> (see <a
+href="DockerHelper.html#method-i-docker_clean">docker_clean</a>) as well as
+image <code>image</code>.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#rmi">docker rmi
+</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_clobber-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 309</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_clobber</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+  <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
+
+  <span class="ruby-identifier">docker_clean</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[rmi #{image}]</span>, <span class="ruby-identifier">ignore_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_command" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_command &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the Docker command or aborts if none could be found.</p>
+
+<p>Override by setting the <code>DOCKER_COMMAND</code> environment variable or
+by setting the <code>docker_command</code> attribute on this module.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_command-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_command</span>
+  <span class="ruby-ivar">@docker_command</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DOCKER_COMMAND&#39;</span>) {
+    <span class="ruby-identifier">find_docker_command</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">abort</span>(<span class="ruby-string">&#39;Docker command not found.&#39;</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_reset" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_reset(name, image)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Resets container <code>name</code> by removing (see <a
+href="DockerHelper.html#method-i-docker_clean">docker_clean</a>) and then
+starting (see <a
+href="DockerHelper.html#method-i-docker_start">docker_start</a>) it from
+image <code>image</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_reset-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 322</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_reset</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">docker_clean</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">docker_start</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">image</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_restart" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_restart(name)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Restarts container <code>name</code> by stopping (see <a
+href="DockerHelper.html#method-i-docker_stop">docker_stop</a>) and then
+starting it.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#start">docker
+start </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_restart-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 281</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_restart</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-identifier">docker_stop</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[start #{name}]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_start" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_start(name, image)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Starts container <code>name</code> from image <code>image</code>. This will
+fail if a container with that name is already running. Use <a
+href="DockerHelper.html#method-i-docker_start-21">docker_start!</a> in case
+you want to unconditionally start the container.</p>
+
+<p>Runs the container detached and with all exposed ports published.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#run">docker run
+</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_start-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_start</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+  <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
+
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[run -d -P --name #{name} #{image}]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_start-21" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_start!(name, image)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_start!(name, image) { |name, image| ... }
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Unconditionally starts container <code>name</code> from image
+<code>image</code>.</p>
+
+<p>If the container is already running, it&#39;s restarted (see <a
+href="DockerHelper.html#method-i-docker_restart">docker_restart</a>).
+Otherwise, it&#39;s started (see <a
+href="DockerHelper.html#method-i-docker_start">docker_start</a>) and its
+<code>name</code> and <code>image</code> are yielded to the block if given.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_start-21-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_start!</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+  <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
+
+  <span class="ruby-identifier">docker_restart</span>(<span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">docker_start</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">image</span>).<span class="ruby-identifier">tap</span> {
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">image</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_stop" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_stop(name)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Stops container <code>name</code>.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#stop">docker stop
+</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_stop-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_stop</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-identifier">docker</span> <span class="ruby-node">%W[stop #{name}]</span>, <span class="ruby-identifier">ignore_errors</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_tags" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_tags(image) &rarr; anArray
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the tags associated with image <code>image</code>.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#images">docker
+images </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_tags-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_tags</span>(<span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
+
+  <span class="ruby-identifier">needle</span> = <span class="ruby-identifier">image</span>[<span class="ruby-regexp">/[^:]+/</span>]
+
+  <span class="ruby-identifier">docker</span>(<span class="ruby-value">:images</span>).<span class="ruby-identifier">lines</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">repo</span>, <span class="ruby-identifier">tag</span>, = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>
+    <span class="ruby-identifier">tag</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">repo</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">needle</span>
+  }.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tag</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_url" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_url(port, name) &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the HTTP URL for container <code>name</code> on port
+<code>port</code>. Fails if container is not running or the specified port
+is not exposed.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#port">docker port
+</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_url-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_url</span>(<span class="ruby-identifier">port</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-node">&quot;http://#{docker(:port, name, port)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_version" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_version &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the version number of the Docker client.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#version">docker
+version </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_version-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_version</span>
+  <span class="ruby-identifier">docker</span>(<span class="ruby-value">:version</span>).<span class="ruby-identifier">lines</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_volume" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_volume(volume, name) &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the path to volume <code>volume</code> shared by container
+<code>name</code>.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#inspect">docker
+inspect </a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_volume-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_volume</span>(<span class="ruby-identifier">volume</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-identifier">docker</span> <span class="ruby-value">:inspect</span>, <span class="ruby-node">%W[-f {{index\ .Volumes\ &quot;#{volume}&quot;}} #{name}]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-proxy" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            proxy &rarr; aProxy
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns a new instance of <a href="DockerHelper/Proxy.html">Proxy</a> with
+helper methods available both in abbreviated and unabbreviated form.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="proxy-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">proxy</span>
+  <span class="ruby-constant">Proxy</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-docker_container_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_container_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Placeholder for default container name; must be implemented by utilizing
+class.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_container_name-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 331</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_container_name</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;container name missing&#39;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_fail" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_fail</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Simply aborts; override for different behaviour.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_fail-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 354</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_fail</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">abort</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_image_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_image_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Placeholder for default image name; must be implemented by utilizing class.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_image_name-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 337</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_image_name</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;image name missing&#39;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_pipe" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_pipe</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Executes the command in a subprocess and returns its output as a string, or
+<code>nil</code> if output is empty; override for different behaviour.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_pipe-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 343</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_pipe</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">res</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">popen</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-value">:read</span>).<span class="ruby-identifier">chomp</span>
+  <span class="ruby-identifier">res</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_system" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_system</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Executes the command in a subshell; override for different behaviour.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_system-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+  
+  
+  <section id="Internal" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Internal
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-Internal-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-build_args" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">build_args</span><span
+            class="method-args">(args, options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Builds arguments array suitable for <a
+href="DockerHelper.html#method-i-docker_system">docker_system</a> and <a
+href="DockerHelper.html#method-i-docker_pipe">docker_pipe</a>.</p>
+
+<p>Prefixes the command with <code>sudo</code> unless the <code>NOSUDO</code>
+environment variable is set.</p>
+
+<p>Flattens all arguments, converts them to strings and appends the options
+hash.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="build_args-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">build_args</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">docker_command</span>)
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-value">:sudo</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;NOSUDO&#39;</span>]
+
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span>
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-extract_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">extract_options</span><span
+            class="method-args">(args, *keys)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Extracts options hash from <code>args</code> and applies default options.</p>
+
+<p>Returns the options hash as well as the values for <code>keys</code>, which
+will be removed from the options.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="extract_options-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">extract_options</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:pipe</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:pipe</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:fail_if_empty</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:fail_if_empty</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-value">:pipe</span>]
+  <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:delete</span>))]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-find_docker_command" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_docker_command</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Tries to find the Docker command for the host system. Usually, it&#39;s
+just <code>docker</code>, but on Debian-based systems it&#39;s
+<code>docker.io</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_docker_command-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_docker_command</span>
+  <span class="ruby-identifier">commands</span> = <span class="ruby-node">%w[docker docker.io]</span>
+
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;nuggets/file/which&#39;</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">which_command</span>(<span class="ruby-identifier">commands</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+  <span class="ruby-identifier">commands</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

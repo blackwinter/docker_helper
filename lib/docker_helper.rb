@@ -208,17 +208,26 @@ module DockerHelper
   end
 
   # call-seq:
-  #   docker_url(port, name) -> aString
+  #   docker_port(port, name) -> aString
   #
-  # Returns the HTTP URL for container +name+ on port +port+. Fails
+  # Returns the host and port for container +name+ on port +port+. Fails
   # if container is not running or the specified port is not exposed.
   #
   # Command reference: {docker port
   # }[https://docs.docker.com/reference/commandline/cli/#port]
-  def docker_url(port, name = nil)
+  def docker_port(port, name = nil)
     name ||= docker_container_name
 
-    "http://#{docker(:port, name, port)}"
+    docker :port, name, port
+  end
+
+  # call-seq:
+  #   docker_url(port, name) -> aString
+  #
+  # Returns the HTTP URL for container +name+ on port +port+ (see
+  # #docker_port).
+  def docker_url(port, name = nil)
+    "http://#{docker_port(port, name)}"
   end
 
   # call-seq:

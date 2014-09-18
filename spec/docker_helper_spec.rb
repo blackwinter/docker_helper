@@ -44,6 +44,15 @@ quix                             1.0                 789                 a week 
 
   end
 
+  describe '#port' do
+
+    it 'should return the port' do
+      expect_pipe('0.0.0.0:42', 'port', 'foo', '23', {})
+      expect(subject.docker_port(23, 'foo')).to eq('0.0.0.0:42')
+    end
+
+  end
+
   describe '#url' do
 
     it 'should return the URL' do

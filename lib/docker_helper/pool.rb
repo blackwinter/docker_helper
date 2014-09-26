@@ -26,36 +26,76 @@
 
 module DockerHelper
 
-  # Generic proxy class that allows to call prefixed methods with or without
-  # that prefix via #method_missing.
+  class Pool
 
-  class Proxy
+    DEFAULT_SIZE = 2
 
-    DEFAULT_PREFIX = 'docker'
+    DEFAULT_BASENAME = 'docker_helper'
 
-    def initialize(prefix = nil)
-      self.proxy_prefix = prefix || self.class::DEFAULT_PREFIX
+    def initialize(size = nil, basename = nil, docker = nil)
+      @docker, @previous_name, @basename =
+        docker ||= DockerHelper.proxy, nil,
+        basename ||= self.class::DEFAULT_BASENAME
+
+      yield self if block_given?
+
+      @pool = Array.new(size ||= self.class::DEFAULT_SIZE) { |i|
+        spawn_thread("#{basename}-#{$$}-#{i}")
+      }
+
+      extend(SinglePool) if size == 1
     end
 
-    attr_accessor :proxy_prefix
+    attr_accessor :image, :port, :path
 
-    def method_missing(method, *args, &block)
-      respond_to_missing?(method) ?
-        send(prefix_method(method), *args, &block) : super
+    def fetch_url(name = @previous_name)
+      docker.url(port, @previous_name = fetch(name)) + path.to_s
     end
 
-    def respond_to_missing?(method, _ = false)
-      respond_to?(prefix_method(method))
+    def fetch(name = @previous_name)
+      pool.shift.tap { reclaim(name) }.value
     end
 
-    def pool(size = nil, basename = nil, &block)
-      Pool.new(size, basename, self, &block)
+    def clean(name = @previous_name)
+      pool.map { |t| clean_thread(t.value) }.tap { |clean|
+        clean << clean_thread(name) if name
+      }.each(&:join)
+    end
+
+    def inspect
+      '#<%s:0x%x %s@%d>' % [self.class, object_id, basename, pool.size]
     end
 
     private
 
-    def prefix_method(method)
-      "#{proxy_prefix}_#{method}"
+    attr_reader :docker, :basename, :pool
+
+    def spawn_thread(name, clean = false)
+      Thread.new {
+        docker.clean(name) if clean
+        docker.start(name, image) if image
+        docker.ready(docker.port(port, name), path) if port
+
+        name
+      }
+    end
+
+    def clean_thread(name)
+      Thread.new { docker.clean(name) }
+    end
+
+    def reclaim(name)
+      pool << spawn_thread(name, true) if name
+    end
+
+    module SinglePool
+
+      def fetch(name = @previous_name)
+        name || !block_given? ? super : yield(new_name = super)
+      ensure
+        reclaim(new_name)
+      end
+
     end
 
   end

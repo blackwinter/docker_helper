@@ -419,3 +419,4 @@ end
 
 require_relative 'docker_helper/version'
 require_relative 'docker_helper/proxy'
+require_relative 'docker_helper/pool'

@@ -31,8 +31,10 @@ module DockerHelper
 
   class Proxy
 
-    def initialize(prefix = 'docker')
-      self.proxy_prefix = prefix
+    DEFAULT_PREFIX = 'docker'
+
+    def initialize(prefix = nil)
+      self.proxy_prefix = prefix || self.class::DEFAULT_PREFIX
     end
 
     attr_accessor :proxy_prefix

@@ -62,6 +62,128 @@ quix                             1.0                 789                 a week 
 
   end
 
+  describe '#ready' do
+
+    def expect_socket(result)
+      expect(subject).to receive(:docker_socket_ready).with(
+        *@host_with_port_ary, a_kind_of(Integer), a_kind_of(Float)
+      ).and_return(result)
+    end
+
+    def expect_http(result)
+      expect(subject).to receive(:docker_http_ready).with(
+        *@host_with_port_ary, @path, a_kind_of(Integer), a_kind_of(Float)
+      ).and_return(result)
+    end
+
+    before do
+      @host_with_port_str = '0.0.0.0:42'
+      @host_with_port_ary = @host_with_port_str.split(':')
+    end
+
+    describe 'when socket ready' do
+
+      before do
+        expect_socket(true)
+      end
+
+      describe 'without path' do
+
+        before do
+          expect(subject).not_to receive(:docker_http_ready)
+        end
+
+        it 'should return true with string' do
+          expect(subject.docker_ready(@host_with_port_str)).to eq(true)
+        end
+
+        it 'should return true with array' do
+          expect(subject.docker_ready(@host_with_port_ary)).to eq(true)
+        end
+
+      end
+
+      describe 'with path' do
+
+        before do
+          @path = '/path'
+        end
+
+        describe 'when HTTP ready' do
+
+          before do
+            expect_http(true)
+          end
+
+          it 'should return true with string' do
+            expect(subject.docker_ready(@host_with_port_str, @path)).to eq(true)
+          end
+
+          it 'should return true with array' do
+            expect(subject.docker_ready(@host_with_port_ary, @path)).to eq(true)
+          end
+
+        end
+
+        describe 'when HTTP not ready' do
+
+          before do
+            expect_http(false)
+          end
+
+          it 'should return false with string' do
+            expect(subject.docker_ready(@host_with_port_str, @path)).to eq(false)
+          end
+
+          it 'should return false with array' do
+            expect(subject.docker_ready(@host_with_port_ary, @path)).to eq(false)
+          end
+
+        end
+
+      end
+
+    end
+
+    describe 'when socket ready' do
+
+      before do
+        expect_socket(false)
+        expect(subject).not_to receive(:docker_http_ready)
+      end
+
+      describe 'without path' do
+
+        it 'should return false with string' do
+          expect(subject.docker_ready(@host_with_port_str)).to eq(false)
+        end
+
+        it 'should return false with array' do
+          expect(subject.docker_ready(@host_with_port_ary)).to eq(false)
+        end
+
+      end
+
+      describe 'with path' do
+
+        before do
+          @path = '/path'
+        end
+
+        it 'should return false with string' do
+          expect(subject.docker_ready(@host_with_port_str, @path)).to eq(false)
+        end
+
+        it 'should return false with array' do
+          expect(subject.docker_ready(@host_with_port_ary, @path)).to eq(false)
+        end
+
+      end
+
+    end
+
+  end
+
   describe '#start' do
 
     it 'should start the container' do

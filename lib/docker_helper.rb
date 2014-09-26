@@ -24,6 +24,8 @@
 ###############################################################################
 #++
 
+require 'net/http'
+
 # Various helper methods to control the Docker command-line client. Main
 # entrance point is the #docker helper. Use ::proxy for a self-contained
 # controller object to call these methods on.
@@ -231,6 +233,25 @@ module DockerHelper
   end
 
   # call-seq:
+  #   docker_ready(host_with_port[, path]) -> true or false
+  #
+  # Argument +host_with_port+ must be of the form <tt>host:port</tt>, as
+  # returned by #docker_port, or an array of host and port.
+  #
+  # Returns +true+ if and when the TCP port is available on the host and,
+  # if +path+ is given, a HTTP request for +path+ is successful.
+  #
+  # Returns +false+ if the port and the path haven't become available after
+  # 30 attempts each. Sleeps for 0.1 seconds inbetween attempts.
+  def docker_ready(host_with_port, path = nil, attempts = 30, sleep = 0.1)
+    host, port = host_with_port.is_a?(Array) ?
+      host_with_port : host_with_port.split(':')
+
+    docker_socket_ready(host, port, attempts, sleep) &&
+      (!path || docker_http_ready(host, port, path, attempts, sleep))
+  end
+
+  # call-seq:
   #   docker_start(name, image)
   #
   # Starts container +name+ from image +image+. This will fail if a
@@ -362,6 +383,36 @@ module DockerHelper
   # Simply aborts; override for different behaviour.
   def docker_fail(*args)
     abort
+  end
+
+  # Checks TCP connection.
+  def docker_socket_ready(host, port, attempts, sleep)
+    TCPSocket.new(host, port).close
+    true
+  rescue Errno::ECONNREFUSED
+    return false unless docker_ready_sleep(sleep, attempts -= 1)
+    retry
+  end
+
+  # Checks HTTP connection.
+  def docker_http_ready(host, port, path, attempts, sleep)
+    loop {
+      begin
+        break if Net::HTTP.get_response(host, path, port).is_a?(Net::HTTPSuccess)
+      rescue Errno::ECONNRESET, EOFError => err
+        return false unless docker_ready_sleep(sleep, attempts -= 1)
+        retry
+      end
+
+      return false unless docker_ready_sleep(sleep, attempts -= 1)
+    }
+
+    true
+  end
+
+  # Sleeps unless out of attempts.
+  def docker_ready_sleep(sleep, attempts)
+    sleep(sleep) unless attempts.zero?
   end
 
 end

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module DockerHelper - docker_helper Application documentation (v0.0.1)</title>
+<title>module DockerHelper - docker_helper Application documentation (v0.0.2)</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -93,13 +93,23 @@
     
     <li ><a href="#method-i-docker_fail">#docker_fail</a>
     
+    <li ><a href="#method-i-docker_http_ready">#docker_http_ready</a>
+    
     <li ><a href="#method-i-docker_image_name">#docker_image_name</a>
     
     <li ><a href="#method-i-docker_pipe">#docker_pipe</a>
     
+    <li ><a href="#method-i-docker_port">#docker_port</a>
+    
+    <li ><a href="#method-i-docker_ready">#docker_ready</a>
+    
+    <li ><a href="#method-i-docker_ready_sleep">#docker_ready_sleep</a>
+    
     <li ><a href="#method-i-docker_reset">#docker_reset</a>
     
     <li ><a href="#method-i-docker_restart">#docker_restart</a>
+    
+    <li ><a href="#method-i-docker_socket_ready">#docker_socket_ready</a>
     
     <li ><a href="#method-i-docker_start">#docker_start</a>
     
@@ -247,7 +257,7 @@ href="DockerHelper.html#method-i-docker_system">docker_system</a> if given.</p>
 
           
           <div class="method-source-code" id="docker-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 130</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">options</span>, <span class="ruby-identifier">pipe</span>, <span class="ruby-identifier">fail_if_empty</span>, <span class="ruby-identifier">ignore_errors</span> = <span class="ruby-constant">DockerHelper</span>.
     <span class="ruby-identifier">extract_options</span>(<span class="ruby-identifier">args</span>, <span class="ruby-value">:pipe</span>, <span class="ruby-value">:fail_if_empty</span>, <span class="ruby-value">:ignore_errors</span>)
@@ -306,7 +316,7 @@ build </a></p>
 
           
           <div class="method-source-code" id="docker_build-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 191</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_build</span>(<span class="ruby-identifier">build_path</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
 
@@ -348,7 +358,7 @@ href="https://docs.docker.com/reference/commandline/cli/#rm">docker rm </a></p>
 
           
           <div class="method-source-code" id="docker_clean-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 295</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 325</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_clean</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
 
@@ -393,7 +403,7 @@ href="https://docs.docker.com/reference/commandline/cli/#rmi">docker rmi
 
           
           <div class="method-source-code" id="docker_clobber-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 309</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_clobber</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
   <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
@@ -436,10 +446,105 @@ by setting the <code>docker_command</code> attribute on this module.</p>
 
           
           <div class="method-source-code" id="docker_command-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 56</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_command</span>
   <span class="ruby-ivar">@docker_command</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DOCKER_COMMAND&#39;</span>) {
     <span class="ruby-identifier">find_docker_command</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">abort</span>(<span class="ruby-string">&#39;Docker command not found.&#39;</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_port" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_port(port, name) &rarr; aString
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Returns the host and port for container <code>name</code> on port
+<code>port</code>. Fails if container is not running or the specified port
+is not exposed.</p>
+
+<p>Command reference: <a
+href="https://docs.docker.com/reference/commandline/cli/#port">docker port
+</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_port-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_port</span>(<span class="ruby-identifier">port</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
+
+  <span class="ruby-identifier">docker</span> <span class="ruby-value">:port</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">port</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_ready" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            docker_ready(host_with_port[, path]) &rarr; true or false
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Argument <code>host_with_port</code> must be of the form
+<code>host:port</code>, as returned by <a
+href="DockerHelper.html#method-i-docker_port">docker_port</a>, or an array
+of host and port.</p>
+
+<p>Returns <code>true</code> if and when the TCP port is available on the host
+and, if <code>path</code> is given, a HTTP request for <code>path</code> is
+successful.</p>
+
+<p>Returns <code>false</code> if the port and the path haven&#39;t become
+available after 30 attempts each. Sleeps for 0.1 seconds inbetween
+attempts.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_ready-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_ready</span>(<span class="ruby-identifier">host_with_port</span>, <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">attempts</span> = <span class="ruby-value">30</span>, <span class="ruby-identifier">sleep</span> = <span class="ruby-value">0.1</span>)
+  <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span> = <span class="ruby-identifier">host_with_port</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-operator">?</span>
+    <span class="ruby-identifier">host_with_port</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">host_with_port</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>)
+
+  <span class="ruby-identifier">docker_socket_ready</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">attempts</span>, <span class="ruby-identifier">sleep</span>) <span class="ruby-operator">&amp;&amp;</span>
+    (<span class="ruby-operator">!</span><span class="ruby-identifier">path</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">docker_http_ready</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">attempts</span>, <span class="ruby-identifier">sleep</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -477,7 +582,7 @@ image <code>image</code>.</p>
 
           
           <div class="method-source-code" id="docker_reset-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 322</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 352</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_reset</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">docker_clean</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">docker_start</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">image</span>)
@@ -520,7 +625,7 @@ start </a></p>
 
           
           <div class="method-source-code" id="docker_restart-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 281</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 311</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_restart</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
 
@@ -568,7 +673,7 @@ href="https://docs.docker.com/reference/commandline/cli/#run">docker run
 
           
           <div class="method-source-code" id="docker_start-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 235</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_start</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
   <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
@@ -621,7 +726,7 @@ href="DockerHelper.html#method-i-docker_start">docker_start</a>) and its
 
           
           <div class="method-source-code" id="docker_start-21-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 251</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_start!</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span>  <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
   <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
@@ -666,7 +771,7 @@ href="https://docs.docker.com/reference/commandline/cli/#stop">docker stop
 
           
           <div class="method-source-code" id="docker_stop-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 267</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 297</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_stop</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">_</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
 
@@ -708,7 +813,7 @@ images </a></p>
 
           
           <div class="method-source-code" id="docker_tags-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 170</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_tags</span>(<span class="ruby-identifier">image</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">image</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_image_name</span>
 
@@ -748,22 +853,16 @@ images </a></p>
         <div class="method-description">
           
           <p>Returns the HTTP URL for container <code>name</code> on port
-<code>port</code>. Fails if container is not running or the specified port
-is not exposed.</p>
-
-<p>Command reference: <a
-href="https://docs.docker.com/reference/commandline/cli/#port">docker port
-</a></p>
+<code>port</code> (see <a
+href="DockerHelper.html#method-i-docker_port">docker_port</a>).</p>
           
           
 
           
           <div class="method-source-code" id="docker_url-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 218</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_url</span>(<span class="ruby-identifier">port</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
-
-  <span class="ruby-node">&quot;http://#{docker(:port, name, port)}&quot;</span>
+  <span class="ruby-node">&quot;http://#{docker_port(port, name)}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -801,7 +900,7 @@ version </a></p>
 
           
           <div class="method-source-code" id="docker_version-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 159</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_version</span>
   <span class="ruby-identifier">docker</span>(<span class="ruby-value">:version</span>).<span class="ruby-identifier">lines</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">last</span>
 <span class="ruby-keyword">end</span></pre>
@@ -842,7 +941,7 @@ inspect </a></p>
 
           
           <div class="method-source-code" id="docker_volume-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 204</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_volume</span>(<span class="ruby-identifier">volume</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">docker_container_name</span>
 
@@ -881,7 +980,7 @@ helper methods available both in abbreviated and unabbreviated form.</p>
 
           
           <div class="method-source-code" id="proxy-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 45</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">proxy</span>
   <span class="ruby-constant">Proxy</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -923,7 +1022,7 @@ class.</p>
 
           
           <div class="method-source-code" id="docker_container_name-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 331</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 361</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_container_name</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;container name missing&#39;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -956,9 +1055,53 @@ class.</p>
 
           
           <div class="method-source-code" id="docker_fail-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 354</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 384</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_fail</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">abort</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_http_ready" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_http_ready</span><span
+            class="method-args">(host, port, path, attempts, sleep)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks HTTP connection.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_http_ready-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 398</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_http_ready</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">attempts</span>, <span class="ruby-identifier">sleep</span>)
+  <span class="ruby-identifier">loop</span> {
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">get_response</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">port</span>).<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPSuccess</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ECONNRESET</span>, <span class="ruby-constant">EOFError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">docker_ready_sleep</span>(<span class="ruby-identifier">sleep</span>, <span class="ruby-identifier">attempts</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>)
+      <span class="ruby-keyword">retry</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">docker_ready_sleep</span>(<span class="ruby-identifier">sleep</span>, <span class="ruby-identifier">attempts</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>)
+  }
+
+  <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -989,7 +1132,7 @@ class.</p>
 
           
           <div class="method-source-code" id="docker_image_name-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 337</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 367</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_image_name</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;image name missing&#39;</span>, <span class="ruby-identifier">caller</span>(<span class="ruby-value">1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1023,10 +1166,80 @@ class.</p>
 
           
           <div class="method-source-code" id="docker_pipe-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 343</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 373</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_pipe</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">res</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">popen</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-value">:read</span>).<span class="ruby-identifier">chomp</span>
   <span class="ruby-identifier">res</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_ready_sleep" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_ready_sleep</span><span
+            class="method-args">(sleep, attempts)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sleeps unless out of attempts.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_ready_sleep-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 414</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_ready_sleep</span>(<span class="ruby-identifier">sleep</span>, <span class="ruby-identifier">attempts</span>)
+  <span class="ruby-identifier">sleep</span>(<span class="ruby-identifier">sleep</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">attempts</span>.<span class="ruby-identifier">zero?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-docker_socket_ready" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">docker_socket_ready</span><span
+            class="method-args">(host, port, attempts, sleep)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks TCP connection.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="docker_socket_ready-source">
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 389</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_socket_ready</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">attempts</span>, <span class="ruby-identifier">sleep</span>)
+  <span class="ruby-constant">TCPSocket</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>).<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ECONNREFUSED</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">docker_ready_sleep</span>(<span class="ruby-identifier">sleep</span>, <span class="ruby-identifier">attempts</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>)
+  <span class="ruby-keyword">retry</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1057,7 +1270,7 @@ class.</p>
 
           
           <div class="method-source-code" id="docker_system-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 349</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 379</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">docker_system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1129,7 +1342,7 @@ hash.</p>
 
           
           <div class="method-source-code" id="build_args-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">build_args</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">docker_command</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-value">:sudo</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;NOSUDO&#39;</span>]
@@ -1169,7 +1382,7 @@ will be removed from the options.</p>
 
           
           <div class="method-source-code" id="extract_options-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extract_options</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
 
@@ -1214,7 +1427,7 @@ just <code>docker</code>, but on Debian-based systems it&#39;s
 
           
           <div class="method-source-code" id="find_docker_command-source">
-            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/docker_helper.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_docker_command</span>
   <span class="ruby-identifier">commands</span> = <span class="ruby-node">%w[docker docker.io]</span>
 
@@ -1241,7 +1454,7 @@ just <code>docker</code>, but on Debian-based systems it&#39;s
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

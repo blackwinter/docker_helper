@@ -2,6 +2,12 @@
 
 = Revision history for docker_helper
 
+== 0.0.2 [2014-09-26]
+
+* Added DockerHelper#docker_ready.
+* Added DockerHelper#docker_port.
+* Added DockerHelper::Pool.
+
 == 0.0.1 [2014-08-05]
 
 * First release.

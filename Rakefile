@@ -1,4 +1,4 @@
-require File.expand_path(%q{../lib/docker_helper/version}, __FILE__)
+require_relative 'lib/docker_helper/version'
 
 begin
   require 'hen'

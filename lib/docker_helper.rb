@@ -399,7 +399,7 @@ module DockerHelper
     loop {
       begin
         break if Net::HTTP.get_response(host, path, port).is_a?(Net::HTTPSuccess)
-      rescue Errno::ECONNRESET, EOFError => err
+      rescue Errno::ECONNRESET, EOFError
         return false unless docker_ready_sleep(sleep, attempts -= 1)
         retry
       end
